@@ -78,34 +78,83 @@ public:
 	{
 		switch (hashit(operator_type))
 		{
-		case ADD:
-		{
-			print_input(operator_type, hex_operand_vec);
+			case ADD:
+			{
+				print_input(operator_type, hex_operand_vec);
 
-			vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
-			unsigned long result = bin_operand_vec[0].to_ulong() + bin_operand_vec[1].to_ulong();
-			cout << hex << result << endl;
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					unsigned long result = bin_operand_vec[0].to_ulong() + bin_operand_vec[1].to_ulong();
+					cout << hex << result << endl;
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
+				break;
+			}
+			case SUB:
+			{
+				print_input(operator_type, hex_operand_vec);
 
-			break;
-		}
-		case SUB:
-		{
-			print_input(operator_type, hex_operand_vec);
-
-			vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
-			unsigned long result = bin_operand_vec[0].to_ulong() - bin_operand_vec[1].to_ulong();
-			cout << hex << result << endl;
-
-			break;
-		}
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					unsigned long result = bin_operand_vec[0].to_ulong() - bin_operand_vec[1].to_ulong();
+					cout << hex << result << endl;
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
+				break;
+			}
 			case AND:
-				cout << "AND" << endl;
+			{
+				print_input(operator_type, hex_operand_vec);
+				
+				try 
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					unsigned long result = (bin_operand_vec[0] & bin_operand_vec[1]).to_ulong();
+					cout << hex << result << endl;
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
 				break;
+			}
 			case OR:
-				cout << "OR" << endl;
+			{
+				print_input(operator_type, hex_operand_vec);
+
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					unsigned long result = (bin_operand_vec[0] | bin_operand_vec[1]).to_ulong();
+					cout << hex << result << endl;
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
 				break;
+			}
 			case XOR:
-				cout << "XOR" << endl;
+				print_input(operator_type, hex_operand_vec);
+
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					unsigned long result = (bin_operand_vec[0] ^ bin_operand_vec[1]).to_ulong();
+					cout << hex << result << endl;
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
 				break;
 			case LSL:
 				cout << "LSL" << endl;
@@ -114,13 +163,64 @@ public:
 				cout << "LSR" << endl;
 				break;
 			case EQ:
-				cout << "EQ" << endl;
+				print_input(operator_type, hex_operand_vec);
+
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					if (bin_operand_vec[0] == bin_operand_vec[1])
+					{
+						cout << "True" << endl;
+					}
+					else
+					{
+						cout << "False" << endl;
+					}
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
 				break;
 			case LT:
-				cout << "LT" << endl;
+				print_input(operator_type, hex_operand_vec);
+
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					if (bin_operand_vec[0].to_ulong() < bin_operand_vec[1].to_ulong())
+					{
+						cout << "True" << endl;
+					}
+					else
+					{
+						cout << "False" << endl;
+					}
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
 				break;
 			case GT:
-				cout << "GT" << endl;
+				print_input(operator_type, hex_operand_vec);
+
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					if (bin_operand_vec[0].to_ulong() > bin_operand_vec[1].to_ulong())
+					{
+						cout << "True" << endl;
+					}
+					else
+					{
+						cout << "False" << endl;
+					}
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
 				break;
 			case INVALID:
 				print_input(operator_type, hex_operand_vec);

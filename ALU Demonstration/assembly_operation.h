@@ -2,6 +2,7 @@
 #define ASSEMBLY_OPERATION
 
 #include <bitset>
+#include <cstdint>
 #include <vector>
 
 class assembly_operation
@@ -85,7 +86,7 @@ public:
 				{
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
 					unsigned long result = bin_operand_vec[0].to_ulong() + bin_operand_vec[1].to_ulong();
-					cout << hex << result << endl;
+					cout << "0x" << hex << uppercase << result << endl;
 				}
 				catch (const out_of_range& error)
 				{
@@ -99,7 +100,7 @@ public:
 				{
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
 					unsigned long result = bin_operand_vec[0].to_ulong() - bin_operand_vec[1].to_ulong();
-					cout << hex << result << endl;
+					cout << "0x" << hex << uppercase << result << endl;
 				}
 				catch (const out_of_range& error)
 				{
@@ -113,7 +114,7 @@ public:
 				{
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
 					unsigned long result = (bin_operand_vec[0] & bin_operand_vec[1]).to_ulong();
-					cout << hex << result << endl;
+					cout << "0x" << hex << uppercase << result << endl;
 				}
 				catch (const out_of_range& error)
 				{
@@ -127,7 +128,7 @@ public:
 				{
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
 					unsigned long result = (bin_operand_vec[0] | bin_operand_vec[1]).to_ulong();
-					cout << hex << result << endl;
+					cout << "0x" << hex << uppercase << result << endl;
 				}
 				catch (const out_of_range& error)
 				{
@@ -141,7 +142,7 @@ public:
 				{
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
 					unsigned long result = (bin_operand_vec[0] ^ bin_operand_vec[1]).to_ulong();
-					cout << hex << result << endl;
+					cout << "0x" << hex << uppercase << result << endl;
 				}
 				catch (const out_of_range& error)
 				{
@@ -155,7 +156,7 @@ public:
 				{
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(1, hex_operand_vec);
 					unsigned long result = ~bin_operand_vec[0].to_ulong();
-					cout << hex << result << endl;
+					cout << "0x" << hex << uppercase << result << endl;
 				}
 				catch (const out_of_range& error)
 				{
@@ -181,7 +182,7 @@ public:
 					}
 
 					unsigned long result = (bin_operand_vec[0] <<= bin_operand_vec[1].to_ulong()).to_ulong();
-					cout << hex << result << endl;
+					cout << "0x" << hex << uppercase << result << endl;
 				}
 				catch (const out_of_range& error)
 				{
@@ -207,7 +208,7 @@ public:
 					}
 
 					unsigned long result = (bin_operand_vec[0] >>= bin_operand_vec[1].to_ulong()).to_ulong();
-					//cout << hex << result << endl;
+					cout << "0x" << hex << uppercase << result << endl;
 				}
 				catch (const out_of_range& error)
 				{

@@ -88,6 +88,7 @@ public:
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
 					unsigned long result = bin_operand_vec[0].to_ulong() + bin_operand_vec[1].to_ulong();
 					cout << "0x" << hex << uppercase << result << endl;
+					//cout << "Size of result in bytes: " << sizeof(result) << endl; //ensuring results are 32-bit
 				}
 				catch (const out_of_range& error)
 				{

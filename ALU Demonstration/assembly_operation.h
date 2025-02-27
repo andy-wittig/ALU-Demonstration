@@ -79,7 +79,6 @@ public:
 		switch (hashit(operator_type))
 		{
 			case ADD:
-			{
 				print_input(operator_type, hex_operand_vec);
 
 				try
@@ -93,9 +92,7 @@ public:
 					cerr << error.what() << endl;
 				}
 				break;
-			}
 			case SUB:
-			{
 				print_input(operator_type, hex_operand_vec);
 
 				try
@@ -109,9 +106,7 @@ public:
 					cerr << error.what() << endl;
 				}
 				break;
-			}
 			case AND:
-			{
 				print_input(operator_type, hex_operand_vec);
 				
 				try 
@@ -125,9 +120,7 @@ public:
 					cerr << error.what() << endl;
 				}
 				break;
-			}
 			case OR:
-			{
 				print_input(operator_type, hex_operand_vec);
 
 				try
@@ -141,7 +134,6 @@ public:
 					cerr << error.what() << endl;
 				}
 				break;
-			}
 			case XOR:
 				print_input(operator_type, hex_operand_vec);
 
@@ -156,11 +148,71 @@ public:
 					cerr << error.what() << endl;
 				}
 				break;
+			case NOT:
+				print_input(operator_type, hex_operand_vec);
+
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(1, hex_operand_vec);
+					unsigned long result = ~bin_operand_vec[0].to_ulong();
+					cout << hex << result << endl;
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
+				break;
 			case LSL:
-				cout << "LSL" << endl;
+				print_input(operator_type, hex_operand_vec);
+
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					
+					if (bin_operand_vec[1][31] == 1) //Check MSB is 1 and therefore negative.
+					{
+						cerr << "ERROR: Negative shift count" << endl;
+						break;
+					}
+					if ((bin_operand_vec[1].to_ulong()) > 32)
+					{
+						cerr << "ERROR: Shift Value Exceeds Bit Size!" << endl;
+						break;
+					}
+
+					unsigned long result = (bin_operand_vec[0] <<= bin_operand_vec[1].to_ulong()).to_ulong();
+					cout << hex << result << endl;
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
 				break;
 			case LSR:
-				cout << "LSR" << endl;
+				print_input(operator_type, hex_operand_vec);
+
+				try
+				{
+					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
+					cout << bin_operand_vec[1];
+					if (bin_operand_vec[1][31] == 1)
+					{
+						cerr << "ERROR: Negative shift count" << endl;
+						break;
+					}
+					if ((bin_operand_vec[1].to_ulong()) > 32)
+					{
+						cerr << "ERROR: Shift Value Exceeds Bit Size!" << endl;
+						break;
+					}
+
+					unsigned long result = (bin_operand_vec[0] >>= bin_operand_vec[1].to_ulong()).to_ulong();
+					//cout << hex << result << endl;
+				}
+				catch (const out_of_range& error)
+				{
+					cerr << error.what() << endl;
+				}
 				break;
 			case EQ:
 				print_input(operator_type, hex_operand_vec);

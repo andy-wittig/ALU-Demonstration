@@ -24,7 +24,7 @@ private:
 		INVALID
 	};
 
-	operator_code hashit(string const& inbound_string)
+	operator_code hashit(string const& inbound_string) //convert input string operation codes into enum
 	{
 		if (inbound_string == "ADD") return ADD;
 		if (inbound_string == "SUB") return SUB;
@@ -37,16 +37,17 @@ private:
 		if (inbound_string == "EQ") return EQ;
 		if (inbound_string == "LT") return LT;
 		if (inbound_string == "GT") return GT;
-		return INVALID;
+		return INVALID; //input operation was not supported
 	}
 
 	vector<bitset<32>> hex_to_binary(int number_of_args, vector<string> arguements_to_convert)
 	{
+		//check if arguements are in desired range
 		if (arguements_to_convert.size() <= 0 
 			|| number_of_args > arguements_to_convert.size()
 			|| arguements_to_convert.size() > number_of_args)
 		{
-			throw out_of_range("ERROR: Number of arguments is out of range!");
+			throw out_of_range("ERROR: Invalid Operand Count!");
 		}
 
 		vector<bitset<32>> modified_arguements;
@@ -64,7 +65,7 @@ private:
 		return modified_arguements;
 	}
 
-	void print_input(string operator_type, vector<string> hex_operand_vec)
+	void print_input(string operator_type, vector<string> hex_operand_vec) //helper printer for input
 	{
 		cout << operator_type << " ";
 		for (string operand : hex_operand_vec)
@@ -170,7 +171,7 @@ public:
 				{
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
 					
-					if (bin_operand_vec[1][31] == 1) //Check MSB is 1 and therefore negative.
+					if (bin_operand_vec[1][31] == 1) //Check if MSB is 1 and therefore negative.
 					{
 						cerr << "ERROR: Negative shift count" << endl;
 						break;
@@ -195,7 +196,7 @@ public:
 				try
 				{
 					vector<bitset<32>> bin_operand_vec = hex_to_binary(2, hex_operand_vec);
-					cout << bin_operand_vec[1];
+					
 					if (bin_operand_vec[1][31] == 1)
 					{
 						cerr << "ERROR: Negative shift count" << endl;

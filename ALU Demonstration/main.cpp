@@ -38,7 +38,7 @@ int main()
 	}
 	else
 	{
-		cerr << "ERROR: File could not be read!" << endl;
+		cerr << "ERROR: File Cannot be Read!" << endl;
 	}
 	inputFile.close();
 

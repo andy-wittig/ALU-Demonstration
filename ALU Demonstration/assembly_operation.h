@@ -45,7 +45,7 @@ private:
 			|| number_of_args > arguements_to_convert.size()
 			|| arguements_to_convert.size() > number_of_args)
 		{
-			throw out_of_range("ERROR: Number of arguments is out of range!");
+			throw out_of_range("ERROR: Invalid Operand Count!");
 		}
 
 		vector<bitset<32>> modified_arguements;
